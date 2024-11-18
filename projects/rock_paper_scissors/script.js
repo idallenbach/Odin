@@ -4,7 +4,7 @@ let choice = ["Rock", "Paper", "Scissors"];
 let computerChoice = choice[random].toLowerCase();
 
 
-// get player input and convert to lowercase
+// get player input
 let playerChoice = prompt('Please Choose: "Rock", "Paper", "Scissors"');
 
 // convert choices to lower case
