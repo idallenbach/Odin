@@ -1,25 +1,28 @@
 let rounds = 0;
-// get player input
-let playerChoice = prompt('Please Choose: "Rock", "Paper", "Scissors"');
+let playerScore = 0;
+let computerScore = 0;
+let lose;
+  // assign points
+function checkLoss() {
+    if (lose) {
+        computerScore++;
+        return computerScore;
+    } else {
+        playerScore++;
+        return playerScore;
+    }
+}
 
 while (rounds < 3) {
-    // create global variables
+    
+    let playerChoice = prompt('Please Choose: "Rock", "Paper", "Scissors"');
     let random = Math.floor(Math.random() * 3);
     let choice = ["Rock", "Paper", "Scissors"];
     let computerChoice = choice[random].toLowerCase();
-    let playerScore = 0;
-    let computerScore = 0;
-    let lose;
+   
     
 
-    // assign points
-    function checkLoss() {
-        if (lose) {
-            computerScore++;
-        } else {
-            playerScore++;
-        }
-}
+  
 
     // convert choices to lower case
     let playerCompare = playerChoice.toLowerCase();
@@ -27,7 +30,8 @@ while (rounds < 3) {
     
         // compare player choice to commputer choice
     if(playerCompare === computerCompare) {
-        console.log = `It's a Tie!`;
+        console.log(`It's a Tie!`);
+        rounds++;
     } else if(playerCompare === "rock" && computerCompare === "paper") {
         console.log(`You Lose! ${computerChoice} beats ${playerChoice}`)
         lose = true;
@@ -61,4 +65,10 @@ while (rounds < 3) {
     }
 }
 
-console.log(`Game Over! player Final score: ${playerScore}, Computer final score: ${computerScore}`)
+if(playerScore > computerScore) {
+    console.log("You Win!")
+} else {
+    console.log("Computer Wins!")
+}
+
+// TODO: print scores on outputs
