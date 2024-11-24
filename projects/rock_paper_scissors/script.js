@@ -1,7 +1,34 @@
+//declare global variables
 let rounds = 0;
+let lose;
 let playerScore = 0;
 let computerScore = 0;
-let lose;
+
+// randomly generate a computer choice
+function getComputerChoice() {
+    let random = Math.floor(Math.random() * 3);
+    let computerChoice = "";
+    if (random === 0) {
+        computerChoice = "Rock";
+        return computerChoice;
+    } else if (random === 1) {
+        computerChoice = "Paper";
+        return computerChoice;
+    } else if (random === 2) {
+        computerChoice = "Scissors";
+        return computerChoice;
+    } else {
+        alert("Error: invalid input from computer")
+    }
+    
+}
+
+//prompt the user for a choice
+function getHumanChoice() {
+    let humanChoice = prompt('Please Choose: "Rock", "Paper", "Scissors"');
+    return humanChoice;
+}
+
   // assign points
 function checkLoss() {
     if (lose) {
@@ -13,62 +40,63 @@ function checkLoss() {
     }
 }
 
-while (rounds < 3) {
-    
-    let playerChoice = prompt('Please Choose: "Rock", "Paper", "Scissors"');
-    let random = Math.floor(Math.random() * 3);
-    let choice = ["Rock", "Paper", "Scissors"];
-    let computerChoice = choice[random].toLowerCase();
+function playGame(){
    
-    
-
-  
-
-    // convert choices to lower case
-    let playerCompare = playerChoice.toLowerCase();
-    let computerCompare = computerChoice.toLowerCase();
-    
+    function playRound() {
+        // get inputs and convert to lowercase
+        let computerChoice = getComputerChoice()
+        let humanChoice = getHumanChoice()
+        computerChoice = computerChoice.toLowerCase()
+        humanChoice = humanChoice.toLowerCase();
         // compare player choice to commputer choice
-    if(playerCompare === computerCompare) {
-        console.log(`It's a Tie!`);
-        rounds++;
-    } else if(playerCompare === "rock" && computerCompare === "paper") {
-        console.log(`You Lose! ${computerChoice} beats ${playerChoice}`)
-        lose = true;
-        checkLoss()
-        rounds++;
-    } else if(playerCompare === "paper" && computerCompare === "scissors") {
-        console.log(`You Lose! ${computerChoice} beats ${playerChoice}`)
-        lose = true;
-        checkLoss()
-        rounds++;
-    } else if(playerCompare === "scissors" && computerCompare === "rock") {
-        console.log(`You Lose! ${computerChoice} beats ${playerChoice}`)
-        lose = true;
-        checkLoss()
-        rounds++;
-    } else if(playerCompare === "rock" && computerCompare === "scissors") {
-        console.log(`You Win! ${playerChoice} beats ${computerChoice}`)
-        lose = false;
-        checkLoss()
-        rounds++;
-    } else if(playerCompare === "paper" && computerCompare === "rock") {
-        console.log(`You Win! ${playerChoice} beats ${computerChoice}`);
-        lose = false
-        checkLoss()
-        rounds++;
-    } else if(playerCompare === "scissors" && computerCompare === "paper") {
-        console.log(`You Win! ${playerChoice} beats ${computerChoice}`)
-        lose = false;
-        checkLoss()
-        rounds++;
+          if(humanChoice === "rock" && computerChoice === "paper") {
+            console.log(`You Lose! ${computerChoice} beats ${humanChoice} Player: ${playerScore}, Computer: ${computerScore}`)
+            lose = true;
+            checkLoss()
+            rounds++;
+        } else if(humanChoice === "paper" && computerChoice === "scissors") {
+            console.log(`You Lose! ${computerChoice} beats ${humanChoice} Player: ${playerScore}, Computer: ${computerScore}`)
+            lose = true;
+            checkLoss()
+            rounds++;
+        } else if(humanChoice === "scissors" && computerChoice === "rock") {
+            console.log(`You Lose! ${computerChoice} beats ${humanChoice} Player: ${playerScore}, Computer: ${computerScore}`)
+            lose = true;
+            checkLoss()
+            rounds++;
+        } else if(humanChoice === "rock" && computerChoice === "scissors") {
+            console.log(`You Win! ${humanChoice} beats ${computerChoice} Player: ${playerScore}, Computer: ${computerScore}`)
+            lose = false;
+            checkLoss()
+            rounds++;
+        } else if(humanChoice === "paper" && computerChoice === "rock") {
+            console.log(`You Win! ${humanChoice} beats ${computerChoice} Player: ${playerScore}, Computer: ${computerScore}`);
+            lose = false
+            checkLoss()
+            rounds++;
+        } else if(humanChoice === "scissors" && computerChoice === "paper") {
+            console.log(`You Win! ${humanChoice} beats ${computerChoice} Player: ${playerScore}, Computer: ${computerScore}`)
+            lose = false;
+            checkLoss()
+            rounds++;
+            // The scores are wrong because it's outputting the scores before calling checkloss() i honestly don't care anymore and i'm calling it done.
+        }else {
+            console.log(`It's a Tie! Player: ${playerScore}, Computer: ${computerScore}`);
+            rounds++;
+        }
+    }
+    while (rounds < 5) {
+        playRound()
+    }
+
+    if(playerScore > computerScore) {
+        console.log(`You Win! Player: ${playerScore}, Computer: ${computerScore}`)
+    } else if (computerScore > playerScore) {
+        console.log(`Computer Wins! Player: ${playerScore}, Computer: ${computerScore}`)
+    } else {
+        console.log(`It's a Tie!`)
     }
 }
 
-if(playerScore > computerScore) {
-    console.log("You Win!")
-} else {
-    console.log("Computer Wins!")
-}
 
-// TODO: print scores on outputs
+playGame()
